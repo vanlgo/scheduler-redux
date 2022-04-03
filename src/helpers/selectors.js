@@ -1,9 +1,6 @@
-export function getAppointmentsForDay(state, day) {
+function getAppointmentsForDay(state, day) {
   // searching for the current day selected
   const currentDay = state.days.filter(daily => daily.name === day);
-
-  console.log(currentDay)
-
 
   // if there is no day found, return an empty array
   if (currentDay.length < 1) {
@@ -16,3 +13,23 @@ export function getAppointmentsForDay(state, day) {
   // searching the appointments data that match appointment ids from current day
   return currentApps.map(data => state.appointments[data]);
 };
+
+function getInterview(state, interview) {
+  // first filter out null interviews
+  if (!interview) {
+    return null;
+  }
+
+  // get interviewer using id from interview object and searching through state interviewer data
+  const interviewer = state.interviewers[interview.interviewer]
+
+  return {
+    student: interview.student, // get student name from interviewer
+    interviewer: interviewer
+  }
+};
+
+export {
+  getAppointmentsForDay,
+  getInterview
+}
