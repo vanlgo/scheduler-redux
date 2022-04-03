@@ -15,7 +15,7 @@ function useVisualMode(initial) {
     } else {
       // otherwise, transition appends new mode to history
       setMode(newMode);
-      setHistory([...history, newMode]);
+      setHistory(prev => ([...prev, newMode]))
     }
   };
 
