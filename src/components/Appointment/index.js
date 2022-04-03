@@ -8,16 +8,26 @@ import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
 
-const EMPTY = "EMPTY";
-const SHOW = "SHOW";
-const CREATE = "CREATE";
-
 export default function Appointment(props) {
+
+  const EMPTY = "EMPTY";
+  const SHOW = "SHOW";
+  const CREATE = "CREATE";
+
+  const { id, bookInterview } = props;
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
 
+  function save(name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
+
+    bookInterview(id, interview);
+  }
 
   return (
     <article className="appointment">
@@ -33,8 +43,7 @@ export default function Appointment(props) {
         <Form
           interviewers={props.interviewers}
           onCancel={back}
-          onSave={props.onSave}
-          edit={false}
+          onSave={save}
         />
       )}
     </article>
