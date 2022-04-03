@@ -43,8 +43,8 @@ export default function Appointment(props) {
     bookInterview(id, interview)
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
-  }
-
+  };
+  
   function cancel() {
     // display that the application is attempting to delete
     transition(DELETING, true);
@@ -53,17 +53,17 @@ export default function Appointment(props) {
     cancelInterview(id)
       .then(() => transition(EMPTY))
       .catch(error => transition(ERROR_DELETE, true));
-  }
+  };
 
   function confirm() {
     // display a request for confirmation
     transition(CONFIRM);
-  }
+  };
 
   function edit() {
     // display form with edit
     transition(EDIT);
-  }
+  };
 
 
 

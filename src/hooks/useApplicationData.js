@@ -10,6 +10,11 @@ export default function useApplicationData() {
 
   const setDay = day => setState({ ...state, day });
 
+
+  function updateSpots() {
+
+  };
+
   function bookInterview(id, interview) {
 
     const appointment = {
