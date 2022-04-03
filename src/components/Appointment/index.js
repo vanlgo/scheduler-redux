@@ -27,6 +27,8 @@ export default function Appointment(props) {
     };
 
     bookInterview(id, interview);
+
+    transition(SHOW);
   }
 
   return (
