@@ -7,12 +7,14 @@ import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
+import Status from "./Status";
 
 export default function Appointment(props) {
 
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
+  const SAVING = "SAVING";
 
   const { id, bookInterview } = props;
 
@@ -27,9 +29,12 @@ export default function Appointment(props) {
       interviewer
     };
 
+    // display that the application is attempting to display
+    transition(SAVING);
+
     // setting state with new appointment id and new interview object
     bookInterview(id, interview)
-    .then(() => transition(SHOW));
+      .then(() => transition(SHOW));
   }
 
   return (
@@ -47,6 +52,11 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
+        />
+      )}
+      {mode === SAVING && (
+        <Status
+          message={"SAVING"}
         />
       )}
     </article>
