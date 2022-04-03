@@ -14,6 +14,22 @@ function getAppointmentsForDay(state, day) {
   return currentApps.map(data => state.appointments[data]);
 };
 
+function getInterviewersForDay(state, day) {
+  // searching for the current day selected
+  const currentDay = state.days.filter(daily => daily.name === day);
+
+  // if there is no day found, return an empty array
+  if (currentDay.length < 1) {
+    return [];
+  }
+
+  // finding interviewer array in current day
+  const currentApps = [...currentDay[0].interviewers];
+
+  // searching the interviewer data that match interviewer ids from current day
+  return currentApps.map(data => state.interviewers[data]);
+};
+
 function getInterview(state, interview) {
   // first filter out null interviews
   if (!interview) {
@@ -31,5 +47,6 @@ function getInterview(state, interview) {
 
 export {
   getAppointmentsForDay,
+  getInterviewersForDay,
   getInterview
 }
