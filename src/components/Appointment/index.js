@@ -8,6 +8,7 @@ import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
+import Confirm from "./Confirm";
 
 export default function Appointment(props) {
 
@@ -16,6 +17,7 @@ export default function Appointment(props) {
   const CREATE = "CREATE";
   const SAVING = "SAVING";
   const DELETING = "DELETING";
+  const CONFIRM = "CONFIRM";
 
   const { id, bookInterview, cancelInterview } = props;
 
@@ -42,9 +44,14 @@ export default function Appointment(props) {
     // display that the application is attempting to delete
     transition(DELETING, true);
 
-    // getting rid of the id
+    // getting rid of the interview at id
     cancelInterview(id)
       .then(() => transition(EMPTY));
+  }
+
+  function confirm() {
+    // display a request for confirmation
+    transition(CONFIRM);
   }
 
 
@@ -57,7 +64,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete={cancel}
+          onDelete={confirm}
         />
       )}
       {mode === CREATE && (
@@ -75,6 +82,13 @@ export default function Appointment(props) {
       {mode === DELETING && (
         <Status
           message={"DELETING"}
+        />
+      )}
+      {mode === CONFIRM && (
+        <Confirm
+          message={"Are you sure you would like to delete?"}
+          onConfirm={cancel}
+          onCancel={back}
         />
       )}
     </article>
