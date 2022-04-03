@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import "components/Application.scss";
-import DayList from "./DayList";
 
+import { getAppointmentsForDay } from "helpers/selectors";
+
+import DayList from "./DayList";
 import Appointment from "./Appointment";
 
 export default function Application(props) {
@@ -13,7 +15,7 @@ export default function Application(props) {
     appointments: {}
   });
 
-  const dailyAppointments = [];
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const setDay = day => setState({ ...state, day });
 
