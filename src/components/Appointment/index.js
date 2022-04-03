@@ -21,14 +21,15 @@ export default function Appointment(props) {
   );
 
   function save(name, interviewer) {
+    // creating new interview object with student input and chosen interviewer
     const interview = {
       student: name,
       interviewer
     };
 
-    bookInterview(id, interview);
-
-    transition(SHOW);
+    // setting state with new appointment id and new interview object
+    bookInterview(id, interview)
+    .then(() => transition(SHOW));
   }
 
   return (

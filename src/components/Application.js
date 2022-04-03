@@ -34,8 +34,7 @@ export default function Application(props) {
   });
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
-    
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -46,10 +45,13 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    setState({
-      ...state,
-      appointments
-    });
+    return axios.put(`/api/appointments/${id}`, { interview: interview })
+      .then(() => {
+        setState({
+          ...state,
+          appointments
+        });
+      })
   };
 
   useEffect(() => {
@@ -69,7 +71,7 @@ export default function Application(props) {
   }, [])
 
   const setDay = day => setState({ ...state, day });
-  
+
   return (
     <main className="layout">
       <section className="sidebar">
