@@ -44,7 +44,7 @@ export default function Appointment(props) {
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE, true));
   };
-  
+
   function cancel() {
     // display that the application is attempting to delete
     transition(DELETING, true);
@@ -68,7 +68,10 @@ export default function Appointment(props) {
 
 
   return (
-    <article className="appointment">
+    <article
+      className="appointment"
+      data-testid="appointment"
+    >
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SHOW && (
